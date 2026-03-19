@@ -1,98 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Wiskunde Escape Game</title>
+
+<title>Logic Runner</title>
+
+<script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
 
 <style>
+
 body{
-font-family:Arial;
-background:#171a21;
+margin:0;
+background:#111;
 color:white;
 text-align:center;
-padding:40px;
+font-family:Arial;
 }
 
-button{
-padding:10px 20px;
-margin:10px;
-font-size:18px;
-cursor:pointer;
+#game{
+margin:auto;
+width:800px;
 }
 
-.correct{background:green}
-.wrong{background:red}
 </style>
+
 </head>
 
 <body>
 
-<h1>🔐 Wiskunde Escape Game</h1>
+<h1>🧠 Logic Runner</h1>
+<p>Spring over obstakels en los logica vragen op!</p>
 
-<h2 id="question"></h2>
+<div id="game"></div>
 
-<div id="answers"></div>
-
-<p>Score: <span id="score">0</span></p>
-
-<script>
-
-let score=0
-let current
-
-function newQuestion(){
-
-let P=Math.random()>0.5
-let Q=Math.random()>0.5
-
-let correct=P&&Q
-
-let answers=[correct,!correct,true,false]
-
-answers=[...new Set(answers)]
-
-while(answers.length<4){
-answers.push(Math.random()>0.5)
-}
-
-answers.sort(()=>Math.random()-0.5)
-
-current={
-q:`P=${P}, Q=${Q}. Wat is P ∧ Q?`,
-answers:answers,
-correct:answers.indexOf(correct)
-}
-
-document.getElementById("question").innerText=current.q
-
-let html=""
-
-current.answers.forEach((a,i)=>{
-
-html+=`<button onclick="answer(${i})">${a?"waar":"onwaar"}</button>`
-
-})
-
-document.getElementById("answers").innerHTML=html
-
-}
-
-function answer(i){
-
-if(i===current.correct){
-
-score+=10
-
-}
-
-document.getElementById("score").innerText=score
-
-newQuestion()
-
-}
-
-newQuestion()
-
-</script>
+<script src="game.js"></script>
 
 </body>
+
 </html>
